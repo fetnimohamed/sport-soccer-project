@@ -1,0 +1,11 @@
+.winner{
+    color :aqua;
+font-size: x-large;
+}
+.loser{
+    color: blueviolet;
+    font-size: small;
+}
+.drawer{
+    color: blue;
+}

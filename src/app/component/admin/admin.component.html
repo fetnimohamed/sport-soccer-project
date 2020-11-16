@@ -1,0 +1,113 @@
+<br><br><br><br><br><br>
+<div class="container">
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+        aria-controls="nav-home" aria-selected="true">players list</a>
+      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+        aria-controls="nav-profile" aria-selected="false">matches List</a>
+      <a class="nav-item nav-link" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab"
+        aria-controls="nav-profile" aria-selected="false">Users List</a>
+
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <div class="card m-3">
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">img</th>
+                <th scope="col">name</th>
+                <th scope="col">dicription</th>
+                <th scope="col">birthday</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let p of players'>
+                <th scope="row">{{p.id}}</th>
+                <td><img style="width: 70px;" [src]="p.image" alt=""></td>
+                <td>{{p.name}}</td>
+                <td>{{p.description}}</td>
+                <td>{{p.birthday}}</td>
+                <td>
+                  <button type="button" class="btn btn-outline-success"(click)='displayPlayer(p.id)'>display</button>
+                  <button type="button" class="btn btn-outline-info"(click)='editPlayer(p.id)'>edit</button>
+                  <button type="button" class="btn btn-outline-danger" (click)='deletePlayer(p.id)'>delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <div class="card m-3 text-center">
+        <div class="card-body">
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Home</th>
+                <th scope="col">Score</th>
+                <th scope="col">Away</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let m of matches'>
+                <th scope="row">{{m.id}}</th>
+                <td>{{m.equipeOne}} <img style="width:40px" [src]="m.imageOne" alt=""></td>
+                <td>{{m.scoreOne}}-{{m.scoreTwo}}</td>
+                <td>{{m.equipeTwo}}  <img style="width:40px" [src]="m.imageTwo" alt=""></td>
+                <td>
+                  <button type="button" class="btn btn-outline-success"(click)='diplayMatch(m.id)'>display</button>
+                  <button type="button" class="btn btn-outline-info"(click)='editMatch(m.id)'>edit</button>
+                  <button type="button" class="btn btn-outline-danger" (click)='deleteMatch(m.id)'>delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
+      <div class="card m-3 text-center">
+        <div class="card-body">
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">name</th>
+                <th scope="col">last name</th>
+                <th scope="col">email</th>
+                <th scope="col">tel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let u of users'>
+                <th scope="row">{{u.id}}</th>
+                <td>{{u.firstName | reverse}} </td>
+                <td>{{u.lastName}}</td>
+                <td>{{u.email}}  </td>
+                <td>{{u.tel}}</td>
+                <td>
+                  <button type="button" class="btn btn-outline-success" (click)='diplayUser(u.id)'>display</button>
+                  <button type="button" class="btn btn-outline-info" (click)='editUser(u.id)'>edit</button>
+                  <button type="button" class="btn btn-outline-danger" (click)='deleteUser(u.id)'>delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
