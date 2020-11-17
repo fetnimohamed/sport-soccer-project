@@ -13,7 +13,7 @@ team:any;
 
   ngOnInit(): void {
     this.teamService.getTeamById(this.player.idT).subscribe(
-      data=>{
+      (data)=>{
         this.team=data;
       }
     )
