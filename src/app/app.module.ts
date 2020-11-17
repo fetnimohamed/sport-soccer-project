@@ -79,7 +79,7 @@ import { ReversePipe } from './pipes/reverse.pipe';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    InMemoryWebApiModule.forRoot(DataService)
+    // InMemoryWebApiModule.forRoot(DataService)
   ],
   providers: [],
   bootstrap: [AppComponent]

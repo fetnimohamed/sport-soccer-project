@@ -6,10 +6,10 @@ import { Injectable } from '@angular/core';
 })
 export class MatchService {
 //!definir l'adresse
-matchUrl='api/matches'
+  matchUrl ='http://localhost:3000'
   constructor(private httpClient:HttpClient) { }
   getAllMatches(){
-    return this.httpClient.get(this.matchUrl);
+    return this.httpClient.get(`${this.matchUrl}/allMatches`);
   }
   addMatch(match:any){
     return this.httpClient.post(this.matchUrl,match);
