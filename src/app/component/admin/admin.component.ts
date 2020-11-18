@@ -57,7 +57,7 @@ this.router.navigate([`diplay-player/${this.match.idR}`]);
   getAllMatches(){
     this.matchService.getAllMatches().subscribe(
       data => {
-        this.matches = data;
+        this.matches = data.matches;
       });
   }
   deleteMatch(id : number) {

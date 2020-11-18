@@ -9,7 +9,7 @@ export class MatchService {
   matchUrl ='http://localhost:3000'
   constructor(private httpClient:HttpClient) { }
   getAllMatches(){
-    return this.httpClient.get(`${this.matchUrl}/allMatches`);
+    return this.httpClient.get<{message:string,matches:any}>(`${this.matchUrl}/allMatches`);
   }
   addMatch(match:any){
     return this.httpClient.post(this.matchUrl,match);

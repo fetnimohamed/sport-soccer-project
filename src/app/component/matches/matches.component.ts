@@ -13,7 +13,7 @@ matches: any ;
   ngOnInit(): void {
 this.matchService.getAllMatches().subscribe(
   data =>{
-    this.matches= data;
+    this.matches= data.matches;
   }
 )
   }
