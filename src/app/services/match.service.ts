@@ -12,10 +12,10 @@ export class MatchService {
     return this.httpClient.get<{message:string,matches:any}>(`${this.matchUrl}/allMatches`);
   }
   addMatch(match:any){
-    return this.httpClient.post(this.matchUrl,match);
+    return this.httpClient.post(`${this.matchUrl}/addMatches`,match);
   }
-  deleteMatch(id:number){
-    return this.httpClient.delete(`${this.matchUrl}/${id}`);
+  deleteMatch(id:string){
+    return this.httpClient.delete(`${this.matchUrl}/deleteMatch/${id}`);
   }
   getMatchById(id:number){
     return this.httpClient.get(`${this.matchUrl}/${id}`);

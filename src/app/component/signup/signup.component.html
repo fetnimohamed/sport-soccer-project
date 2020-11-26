@@ -13,8 +13,7 @@
         <div class="form-group">
           <input type="text" class="form-control" formControlName='firstName' placeholder="First Name">
         </div>
-        <div
-          *ngIf="signupForm.controls['firstName'].invalid && (signupForm.controls['firstName'].dirty ||
+        <div *ngIf="signupForm.controls['firstName'].invalid && (signupForm.controls['firstName'].dirty ||
           signupForm.controls['firstName'].touched)">
           <div *ngIf="signupForm.controls['firstName'].errors.minlength" class="text-danger">
             eorrrrrrr
@@ -26,8 +25,7 @@
         <div class="form-group">
           <input type="text" class="form-control" formControlName='email' placeholder="Email">
         </div>
-        <div
-          *ngIf="signupForm.controls['email'].invalid && (signupForm.controls['email'].dirty ||
+        <div *ngIf="signupForm.controls['email'].invalid && (signupForm.controls['email'].dirty ||
           signupForm.controls['email'].touched)">
           <div *ngIf="signupForm.controls['email'].errors.email" class="text-danger">email invalid!</div>
         </div>
@@ -51,12 +49,20 @@
         </div>
         <div
           *ngIf="signupForm.controls['tel'].invalid && (signupForm.controls['tel'].dirty || signupForm.controls['tel'].touched)">
-          <div *ngIf="signupForm.controls['tel'].errors.minlength || signupForm.controls['tel'].errors.maxlength" class="text-danger">
+          <div *ngIf="signupForm.controls['tel'].errors.minlength || signupForm.controls['tel'].errors.maxlength"
+            class="text-danger">
             tel not valid !!
           </div>
         </div>
-
-        <button type="submit" class="btn btn-outline-success" [disabled]='signupForm.invalid'
-          (click)=signup(signupForm.value);>SignUp</button>
+        <button type="button" (click)='filePicker.click()' class="btn btn-success">Sélectionner image</button>
+        <div class="form-group">
+          <input style="visibility: hidden;" type="file" class="form-control" #filePicker
+            (change)='onImageSelected($event)' />
+        </div>
+        <img *ngIf="imagePreview" class="mb-3" width="100" height="100" [src]="imagePreview">
+        <div>
+          <button type="submit" class="btn btn-outline-success" [disabled]='signupForm.invalid'
+            (click)=signup(signupForm.value);>SignUp</button>
+        </div>
       </form>
     </div>

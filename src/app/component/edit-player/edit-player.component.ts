@@ -9,34 +9,49 @@ import { PlayerService } from 'src/app/services/player.service';
   styleUrls: ['./edit-player.component.css']
 })
 export class EditPlayerComponent implements OnInit {
-  id:any;
-  editPlayer:any;
-  editPlayersForm:FormGroup;
-  constructor(private formbuilder:FormBuilder,
-    private activatedRoute:ActivatedRoute,
-    private playerService : PlayerService,
-    private router:Router) { }
+  id: any;
+  imagePreview:any;
+  editPlayer: any;
+  editPlayersForm: FormGroup;
+  constructor(private formbuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private playerService: PlayerService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.editPlayer=this.formbuilder.group(
-      {name:[''],
-      position:[''],
-        birthday:[''],
-        description:['']
+    this.editPlayersForm = this.formbuilder.group(
+      {
+        name: [''],
+        position: [''],
+        birthday: [''],
+        description: [''],
+        image:['']
 
       }
     );
-this.id=this.activatedRoute.snapshot.paramMap.get('id');
-if (this.id) {
-  this.playerService.getplayerById(this.id).subscribe(
-    data=>{
-      this.editPlayer=data;
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (this.id) {
+      this.playerService.getplayerById(this.id).subscribe(
+        data => {
+          this.editPlayer = data.player;
+        }
+      )
+    } else {
+      this.editPlayer = {};
+      
     }
-  )
-}else{
-  this.editPlayer={};
-}
   }
+  onImageSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.editPlayersForm.patchValue({ image: file });
+    this.editPlayersForm.updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string
+    };
+    reader.readAsDataURL(file);
+  }
+  
   editP() {
     if (this.id) {
       this.playerService.editPlayer(this.editPlayer).subscribe(
@@ -45,19 +60,19 @@ if (this.id) {
         }
       );
     } else {
-      this.playerService.addPlayer(this.editPlayer).subscribe(
-        ()=>{ 
+      this.playerService.addPlayer(this.editPlayer, this.editPlayersForm.value.image).subscribe(
+        () => {
           console.log('added by the boss');
           this.router.navigate(['Admin']);
         }
       );
     }
-   
+
   }
-  butonValue(){
+  butonValue() {
     if (this.id) {
       return "edit Value";
-    }else{
+    } else {
       return "add player";
     }
   }

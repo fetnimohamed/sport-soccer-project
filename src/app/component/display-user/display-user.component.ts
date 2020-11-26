@@ -18,7 +18,7 @@ id:any;
 this.id=this.activatedroute.snapshot.paramMap.get('id');
     this.userSerice.getUserById(this.id).subscribe(
       data=>{
-        this.user=data;
+        this.user=data.user;
       }
     )
   }

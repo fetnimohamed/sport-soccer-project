@@ -13,7 +13,9 @@ players : any;
   ngOnInit(): void {
     this.playerService.getplayers().subscribe(
       data=>{
-        this.players=data;
+        console.log('data from be', data);
+        
+        this.players=data.players;
       }
     )
 

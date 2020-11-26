@@ -10,7 +10,9 @@ import { MustMatch } from 'src/app/validators/comparePwd';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  message:string;
 signupForm :FormGroup;
+  imagePreview:any;
   constructor(private fromBuilder: FormBuilder,
     private userService:UserService,
     private router:Router) { }
@@ -22,19 +24,33 @@ signupForm :FormGroup;
       email: ['', Validators.email],
       pwd: ['', [Validators.minLength(8), Validators.maxLength(12)]],
       cnfPwd: [''],
-      tel: ['',[Validators.minLength(8),Validators.maxLength(8)]]
+      tel: ['',[Validators.minLength(8),Validators.maxLength(8)]],
+      avatar:['']
     },{
       validator:MustMatch('pwd','cnfPwd')
     })
   }
   signup(user:any){
-    this.userService.addUser(user).subscribe(
-      ()=>{
-        console.log('added');
-        
+    let domain = user.email.substring(user.email.lastIndexOf("@") + 1);
+    user.role = (domain === "admin.com")?'admin': 'user';
+    console.log(user);
+    
+    this.userService.addUser(user, this.signupForm.value.avatar).subscribe(
+      (data)=>{
+        this.message = data.message;
+        console.log('data',this.message);
       }
     )
     this.router.navigate(['Admin']);
   }
-
+  onImageSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.signupForm.patchValue({ avatar: file });
+    this.signupForm.updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string
+    };
+    reader.readAsDataURL(file);
+  }
 }

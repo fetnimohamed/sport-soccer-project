@@ -12,11 +12,11 @@ team:any;
   constructor(private teamService:TeamService) { }
 
   ngOnInit(): void {
-    this.teamService.getTeamById(this.player.idT).subscribe(
-      (data)=>{
-        this.team=data;
-      }
-    )
+    // this.teamService.getTeamById(this.player.idT).subscribe(
+    //   (data)=>{
+    //     this.team=data;
+    //   }
+    // )
   }
 
 }

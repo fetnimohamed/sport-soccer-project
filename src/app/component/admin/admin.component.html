@@ -34,9 +34,9 @@
                 <td>{{p.description}}</td>
                 <td>{{p.birthday}}</td>
                 <td>
-                  <button type="button" class="btn btn-outline-success"(click)='displayPlayer(p.id)'>display</button>
-                  <button type="button" class="btn btn-outline-info"(click)='editPlayer(p.id)'>edit</button>
-                  <button type="button" class="btn btn-outline-danger" (click)='deletePlayer(p.id)'>delete</button>
+                  <button type="button" class="btn btn-outline-success"(click)='displayPlayer(p._id)'>display</button>
+                  <button type="button" class="btn btn-outline-info"(click)='editPlayer(p._id)'>edit</button>
+                  <button type="button" class="btn btn-outline-danger" (click)='deletePlayer(p._id)'>delete</button>
                 </td>
               </tr>
             </tbody>
@@ -60,14 +60,14 @@
             </thead>
             <tbody>
               <tr *ngFor='let m of matches'>
-                <th scope="row">{{m.id}}</th>
+                <th scope="row">{{m._id}}</th>
                 <td>{{m.equipeOne}} <img style="width:40px" [src]="m.imageOne" alt=""></td>
                 <td>{{m.scoreOne}}-{{m.scoreTwo}}</td>
                 <td>{{m.equipeTwo}}  <img style="width:40px" [src]="m.imageTwo" alt=""></td>
                 <td>
-                  <button type="button" class="btn btn-outline-success"(click)='diplayMatch(m.id)'>display</button>
+                  <button type="button" class="btn btn-outline-success"(click)='diplayMatch(m._id)'>display</button>
                   <button type="button" class="btn btn-outline-info"(click)='editMatch(m.id)'>edit</button>
-                  <button type="button" class="btn btn-outline-danger" (click)='deleteMatch(m.id)'>delete</button>
+                  <button type="button" class="btn btn-outline-danger" (click)='deleteMatch(m._id)'>delete</button>
                 </td>
               </tr>
             </tbody>
@@ -92,15 +92,15 @@
             </thead>
             <tbody>
               <tr *ngFor='let u of users'>
-                <th scope="row">{{u.id}}</th>
-                <td>{{u.firstName | reverse}} </td>
+                <th scope="row"><img [src]="u.avatar" width="80px" alt=""></th>
+                <td>{{u.firstName}} </td>
                 <td>{{u.lastName}}</td>
                 <td>{{u.email}}  </td>
                 <td>{{u.tel}}</td>
                 <td>
-                  <button type="button" class="btn btn-outline-success" (click)='diplayUser(u.id)'>display</button>
+                  <button type="button" class="btn btn-outline-success" (click)='diplayUser(u._id)'>display</button>
                   <button type="button" class="btn btn-outline-info" (click)='editUser(u.id)'>edit</button>
-                  <button type="button" class="btn btn-outline-danger" (click)='deleteUser(u.id)'>delete</button>
+                  <button type="button" class="btn btn-outline-danger" (click)='deleteUser(u._id)'>delete</button>
                 </td>
               </tr>
             </tbody>

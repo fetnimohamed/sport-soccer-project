@@ -16,8 +16,10 @@ export class DisplayPlayerComponent implements OnInit {
   ngOnInit(): void {
     this.id=this.activatedRoute.snapshot.paramMap.get('id');
     this.playerService.getplayerById(this.id).subscribe(
-      data=>{
-        this.player=data;
+      data => {
+        this.player = data.player
+       
+
       }
     )
   }

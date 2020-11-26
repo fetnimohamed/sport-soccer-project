@@ -15,9 +15,9 @@ export class ItemComponent implements OnInit {
   ngOnInit(): void {
   }
  result(a:number ,b:number){
-   if (a<b) {
+   if (Number(a) <Number(b)) {
      return "loss";
-   }else if (b<a) {
+   }else if (Number(b)<Number(a)) {
      return "win";
    } else {
      return "draw";

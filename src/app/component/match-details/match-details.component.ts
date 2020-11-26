@@ -37,7 +37,7 @@ export class MatchDetailsComponent implements OnInit {
     );
     
   }
-  diplaySetails(side: number) {
+  diplayDetails(side: number) {
     let detail = ``;
     if (side === 1) {
       for (let i = 0; i < this.details.playersOne.length; i++) {

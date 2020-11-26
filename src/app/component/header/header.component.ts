@@ -8,13 +8,21 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 date:Date;
+conctedUser:any;
   constructor(private router:Router) { }
 
   ngOnInit(): void {
     this.date=new Date();
+    this.conctedUser=JSON.parse(localStorage.getItem('conctedUser'));
   }
   goToContact(){
     this.router.navigate(['contact']);
+
+  }
+
+logout(){
+  localStorage.removeItem('conctedUser');
+  location.reload();
 
   }
 }

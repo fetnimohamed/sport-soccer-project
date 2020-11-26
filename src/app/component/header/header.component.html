@@ -26,8 +26,12 @@
                   <li><a routerLink="blog" class="nav-link">Blog</a></li>
                   <li><a (click)=" goToContact()" class="nav-link">Contact</a></li>
                   <li><a routerLink="Admin" class="nav-link">admin</a></li>
-                  <li><a routerLink="signup" class="nav-link">signup</a></li>
-                  <li><a routerLink="login" class="nav-link">login</a></li>
+                  <li *ngIf='!conctedUser'><a routerLink="signup" class="nav-link">signup</a></li>
+                  <li *ngIf='!conctedUser'><a routerLink="login" class="nav-link">login</a></li>
+                  <li *ngIf='conctedUser'><a class="nav-link"><img class="circular--square" [src]="conctedUser.avatar"
+                        width="50px" alt="">{{conctedUser.firstName}}</a></li>
+                  <li *ngIf='conctedUser'><a (click)="logout()" class="nav-link">logout</a></li>
+
                 </ul>
               </nav>
 
