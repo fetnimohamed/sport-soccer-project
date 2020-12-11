@@ -16,27 +16,35 @@
       <div class="col-lg-8">
         <form #editPlayersForm='ngForm' (ngSubmit)='editP()'>
           <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]='editPlayer.name'  [ngModelOptions]="{standalone: true}" placeholder="Name">
+            <input type="text" class="form-control" [(ngModel)]='editPlayer.name' [ngModelOptions]="{standalone: true}"
+              placeholder="Name">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]='editPlayer.position' [ngModelOptions]="{standalone: true}"  placeholder="position">
+            <input type="text" class="form-control" [(ngModel)]='editPlayer.position'
+              [ngModelOptions]="{standalone: true}" placeholder="position">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]='editPlayer.birthday' [ngModelOptions]="{standalone: true}"  placeholder="birth date">
+            <input type="text" class="form-control" [(ngModel)]='editPlayer.birthday'
+              [ngModelOptions]="{standalone: true}" placeholder="birth date">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]='editPlayer.description' [ngModelOptions]="{standalone: true}"  placeholder="discription">
+            <input type="text" class="form-control" [(ngModel)]='editPlayer.description'
+              [ngModelOptions]="{standalone: true}" placeholder="discription">
           </div>
           <button type="button" (click)='filePicker.click()' class="btn btnsuccess">Sélectionner image</button>
-         <div class="form-group">
-           <input type="file" class="form-control" #filePicker style="visibility: hidden;"
-             (change)='onImageSelected($event)' />
-         </div>
-         <img [src]="imagePreview" height="100px" width="100px" *ngIf='imagePreview'>
-
           <div class="form-group">
-            <input type="submit" class="btn btn-primary py-3 px-5" 
-              value="edit player">
+            <input type="file" class="form-control" #filePicker style="visibility: hidden;"
+              (change)='onImageSelected($event)' />
+          </div>
+          <img [src]="imagePreview" height="100px" width="100px" *ngIf='imagePreview'>
+          <div class="form-group">
+           <select name="teamId" [(ngModel)]="editPlayer.teamId">
+             <option *ngFor='let t of teams' [value]="t._id" >{{t.name}}
+             </option>
+           </select>
+          </div>
+          <div class="form-group">
+            <input type="submit" class="btn btn-primary py-3 px-5" value="edit player">
           </div>
         </form>
       </div>

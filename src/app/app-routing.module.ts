@@ -14,6 +14,7 @@ import { EditPlayerComponent } from './component/edit-player/edit-player.compone
 import { DisplayPlayerComponent } from './component/display-player/display-player.component';
 import { MatchDetailsComponent } from './component/match-details/match-details.component';
 import { DisplayUserComponent } from './component/display-user/display-user.component';
+import { AddTeamComponent } from './component/add-team/add-team.component';
 
 const routes: Routes = [{ path: '', component: HomeComponent },
 { path: 'contact', component: ContactComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [{ path: '', component: HomeComponent },
 { path: "Add-match", component: AddMatchComponent },
 { path: "Add-match/:id", component: AddMatchComponent },
 { path: "Edit-match", component: EditMatchComponent },
+  { path: "Add-team", component: AddTeamComponent},
 { path: "Edit-player/:id", component: EditPlayerComponent },
 { path: "diplay-player/:id", component: DisplayPlayerComponent },
 { path: "diplayUser/:id", component: DisplayUserComponent },

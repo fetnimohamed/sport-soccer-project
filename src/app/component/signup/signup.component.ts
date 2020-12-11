@@ -37,14 +37,21 @@ signupForm :FormGroup;
     
     this.userService.addUser(user, this.signupForm.value.avatar).subscribe(
       (data)=>{
-        this.message = data.message;
-        console.log('data',this.message);
+        console.log('data',data.message);
+        if (data.message ==='User validation failed') {
+          this.message='user exists !!!'
+        } else {
+          this.router.navigate(['Admin']);
+          console.log('new');
+        }
       }
     )
-    this.router.navigate(['Admin']);
+    
   }
   onImageSelected(event: Event) {
-    const file = (event.target as HTMLInputElement).files[0];
+    const file = (event.target as HTMLInputElement).files[2];
+    console.log(file);
+    
     this.signupForm.patchValue({ avatar: file });
     this.signupForm.updateValueAndValidity();
     const reader = new FileReader();

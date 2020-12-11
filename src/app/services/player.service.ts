@@ -27,6 +27,7 @@ export class PlayerService {
     formData.append('position',player.position);
     formData.append('description',player.description);
     formData.append('birthday',player.birthday);
+    formData.append('teamId',player.teamId);
     formData.append('image',image );
     return this.httpClient.post(`${this.playerUrl}/addPlayer`,formData);
   }

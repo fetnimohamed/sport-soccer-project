@@ -50,10 +50,14 @@ mongoose.connect('mongodb://localhost:27017/soccerDB', {
   useUnifiedTopology: true
 });
 const Match = require('./models/match');
+const Team = require("./models/team")
 const Player = require('./models/player');
 const User = require('./models/user');
 const player = require('./models/player');
-const { RESOURCE_CACHE_PROVIDER } = require('@angular/platform-browser-dynamic');
+const {
+  RESOURCE_CACHE_PROVIDER
+} = require('@angular/platform-browser-dynamic');
+const team = require('./models/team');
 //todo security config
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -140,11 +144,11 @@ app.get('/getUsers', (req, res) => {
 });
 //*add user
 app.post('/addUser', multer({
-      storage: storage
-    }).single('avatar'), (req, res) => {
-      console.log('rrr',req.body);
-      console.log('file', req.file);
-      url = req.protocol + '://' + req.get('host');
+  storage: storage
+}).single('avatar'), (req, res) => {
+  console.log('rrr', req.body);
+  console.log('file', req.file);
+  url = req.protocol + '://' + req.get('host');
   bcrypt.hash(req.body.pwd, 10).then(cPwd => {
     const user = new User({
       firstName: req.body.firstName,
@@ -157,20 +161,20 @@ app.post('/addUser', multer({
     })
     console.log(user);
     user.save(err => {
-      console.log('err', err._message);
-      if (err) {
-       res.status(200).json({
-         message: err._message
-       })
-      }
-        
-      }).then(
-      res.status(201).json({
-        message: 'rrrrrr'
-      })
-    );
-  })
 
+      if (err) {
+        if (err._message === 'User validation failed') {
+          res.status(200).json({
+            message: err._message
+          })
+        } else {
+          res.status(201).json({
+            message: 'rrrrrr'
+          })
+        }
+      }
+    })
+  })
 })
 //*get user by id 
 app.get('/getuser/:id', (req, res) => {
@@ -224,17 +228,18 @@ app.get('/getPlayer/:id', (req, res) => {
 })
 //*add player
 app.post('/addPlayer', multer({
-      storage: storage
-    }).single('image'),(req, res) => {
-      console.log('file',req.file);
-      url =req.protocol+'://'+req.get('host');
+  storage: storage
+}).single('image'), (req, res) => {
+  console.log('file', req.file);
+  url = req.protocol + '://' + req.get('host');
   const player = new Player({
 
     name: req.body.name,
     position: req.body.position,
     description: req.body.description,
     birthday: req.body.birthday,
-    image:url+'/images/'+req.file.filename
+    teamId: req.body.teamId,
+    image: url + '/images/' + req.file.filename
   })
   console.log(player);
   player.save().then(
@@ -252,7 +257,8 @@ app.put('/editPlayer/:id', (req, res) => {
     name: req.body.name,
     position: req.body.position,
     description: req.body.description,
-    birthday: req.body.birthday
+    birthday: req.body.birthday,
+    teamId: req.body.teamId
   }).then(
     res.status(200).json({
       message: 'updated!!'
@@ -285,7 +291,7 @@ app.post('/login', (req, res) => {
         role: findedUser.role,
         firstName: findedUser.firstName,
         lastName: findedUser.lastName,
-        avatar:findedUser.avatar
+        avatar: findedUser.avatar
       }
       console.log(userToSend);
       res.status(200).json({
@@ -306,6 +312,33 @@ app.delete('/delete/:id', (req, res) => {
       message: 'user deleted !!'
     })
   )
+})
+//* add team
+app.post('/addTeam', (req, res) => {
+  const team = new Team({
+    name: req.body.name,
+    country: req.body.country
+  })
+  team.save().then(
+    res.status(201).json({
+      message: 'team add!'
+    })
+
+  )
+})
+//* get all teams
+app.get('/allTeams', (req, res) => {
+  Team.find((err, documents) => {
+    if (!err) {
+      res.status(200).json({
+        message: "teams founded!!",
+        teams: documents
+      })
+    } else {
+      message;
+      'no team founded !!'
+    }
+  })
 })
 // *Export la var app
 module.exports = app;

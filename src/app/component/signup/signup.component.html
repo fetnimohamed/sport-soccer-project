@@ -63,6 +63,7 @@
         <div>
           <button type="submit" class="btn btn-outline-success" [disabled]='signupForm.invalid'
             (click)=signup(signupForm.value);>SignUp</button>
-        </div>
+          </div>
+          <div *ngIf='message'class='text-danger' >{{message}}</div>
       </form>
     </div>

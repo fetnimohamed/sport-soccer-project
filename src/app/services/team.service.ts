@@ -5,10 +5,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TeamService {
-teamUrl='api/teams'
+  teamUrl ='http://localhost:3000'
   constructor(private httpClient:HttpClient) { }
   getAllTeams(){
-    return this.httpClient.get(this.teamUrl);
+    return this.httpClient.get<{message:string,teams:any}>(`${this.teamUrl}/allTeams`);
   }
   getTeamById(id:number){
     return  this.httpClient.get(`${this.teamUrl}/${id}`);
@@ -17,7 +17,7 @@ teamUrl='api/teams'
     return this.httpClient.delete(`${this.teamUrl}/${id}`);
   }
   addTeam(team:any){
-    return this.httpClient.post(this.teamUrl,team)
+    return this.httpClient.post(`${this.teamUrl}/addTeam`,team)
   }
   editTeam(team:any){
     return this.httpClient.put(`${this.teamUrl}/${team.id}`, team);

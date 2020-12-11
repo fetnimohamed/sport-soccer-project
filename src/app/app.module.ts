@@ -36,6 +36,7 @@ import { MatchDetailsComponent } from './component/match-details/match-details.c
 import { MatchDisplayComponent } from './component/match-display/match-display.component';
 import { DisplayUserComponent } from './component/display-user/display-user.component';
 import { ReversePipe } from './pipes/reverse.pipe';
+import { AddTeamComponent } from './component/add-team/add-team.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { ReversePipe } from './pipes/reverse.pipe';
     MatchDisplayComponent,
     DisplayUserComponent,
     ReversePipe,
+    AddTeamComponent,
    
     
   ],
